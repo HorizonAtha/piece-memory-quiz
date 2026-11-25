@@ -1,0 +1,115 @@
+body{
+      font-family: sans-serif;
+}
+h1{
+      font-size: 75px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+}
+h2{
+      font-size: 35px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-weight: lighter;
+}
+.buttons{
+      border:solid 3px;
+      width: max-content;
+      padding-left: 15px;
+      padding-right: 15px;
+      height: 60px;
+      font-size: 30px;
+      border-radius: 5px;
+}
+.buttons:hover{
+      background-color: #e0e0e0;
+}
+.buttons:active{
+      scale: 0.9;
+}
+
+#buttonDark{
+      position: fixed;
+      right: 1%;
+      top: 25px;
+      font-size: 40px;
+      background-color: transparent;
+      font-weight:lighter;
+      padding: 2px 2px 2px 2px;
+      color: black;
+      border: none;
+}
+#buttonDark:hover{
+      scale: 1.1;
+}
+#buttonDark:active{
+      scale: 0.95;
+}
+
+#element_Subjek{
+      font-size: 70px;
+      font-weight: bold;
+      margin: 5px 5px 8px 20px;
+}
+#element_Petunjuk{
+      font-size: 50px;
+      color: rgb(59, 59, 59);
+      margin: -20px 5px 5px 35px;
+      max-width: 95vw;
+}
+#element_ContainerInfo{
+      display: flex;
+}
+
+input{
+      min-height: 90px;
+      font-size: 40px;
+      margin-left: 25px;
+      margin-top: 40px;
+      border: 3px solid;
+      border-radius: 10px;
+      background-color: transparent;
+      field-sizing: content;
+      min-width: 120px;
+      padding-left: 20px;
+      padding-right: 20px;
+      font-family: monospace;
+}
+
+#soalLib{
+      user-select: none;
+      position: fixed;
+      width: max-content;
+      max-width: 30vw;
+      min-height: 600px;
+      max-height: 800px;
+      height: max-content;
+      border: solid 3px black;
+      background-color: white;
+      top: 13%;
+      right: -420px;
+      transition: right, ease, 0.3s;
+      padding: 15px 1px 15px 2px;
+      overflow: auto;
+}
+.paket{
+      font-size: 30px;
+      margin: 5px 0px 5px 15px;
+      border: gray 1px solid;
+      width: 22vw;
+}
+.paket:hover{
+      background-color: gainsboro;
+}
+#setting_title{
+      font-size: 40px;
+      margin: 5px 0px 0px 10px;
+      font-weight: bold;
+}
+
+#mobileToggleSetting{
+      position: fixed; 
+      left: 50%;
+      transform: translate(-50%, 0);
+      bottom: 1vw;
+}
