@@ -101,7 +101,7 @@ input {
       position: fixed;
       width: max-content;
       max-width: 30vw;
-      min-height: 600px;
+      min-height: 40vw;
       height: max-content;
       border: solid 3px black;
       background-color: white;
@@ -110,7 +110,7 @@ input {
       transition: right, ease, 0.3s;
       padding: 15px 1px 15px 2px;
       overflow-y: auto;
-      max-height: 800px;
+      max-height: 50vw;
       border-radius: 12px;
 }
 
