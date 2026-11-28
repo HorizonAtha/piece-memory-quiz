@@ -3,22 +3,36 @@
 <head>
       <title>MATERI REFRESHER</title>
       <link rel="stylesheet" href="persiapan.css">
+
+      <script>
+            MathJax = {
+                  tex: {
+                        inlineMath: [['$', '$'], ['\\(', '\\)']],
+                        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+                  }
+              };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js" defer></script>
 </head>
 <body>
       <button id="buttonDark" onclick="dark()">☀︎</button>
-      <button id="mobileToggleSetting" class="buttons"" onclick="slide()">setting</button>
+      <button id="mobileToggleSetting" class="buttons" onclick="slide()">setting</button>
       <h1 id="title" style="max-width: 40vw;">KUIS INGATAN</h1>
-      <h2 id="credit">by Hufardz</h2>
+      <h2 id="credit">by Hz</h2>
       <br>
-      <button id="buttonStart" class="buttons" onclick="getSoal(); StartDisable()">start</button>
+      <button id="buttonStart" class="buttons" onclick="if (isPilgan == false) {getSoal(), StartDisable()} else {getPilgan(), pilgan_StartDisable()};">start</button>
       <br><br><hr><br><br>
-      <img id="element_gambar" src="assets/asset_null.png">
-      <p id="element_Subjek">[subjek]</p>
+      <div style="display: inline-block;">
+            <img id="element_gambar" src="assets/asset_null.png">
+            <p id="element_Subjek">[subjek]</p>
+      </div>
+      
       <p id="element_Petunjuk">[petunjuk]</p>
       <div id="element_ContainerStruktur"></div>
       <br>
       <br>
-      <button onclick="terminate()" style="font-size: 25px;" id="buttonStop" class="buttons">stop</button>
+      <button onclick="if (isPilgan == false) {terminate()} else {pilganterminate()}" style="font-size: 25px;" id="buttonStop" class="buttons">stop</button>
       <button id="buttonNext" class="buttons" style="position: fixed; bottom: 15px; right: 10px;" onclick="evaluasi()">NEXT</button>
 
       <audio id="correctsnd" src="orb.mp3"></audio>
@@ -27,24 +41,24 @@
       <audio id="settingsnd" src="savepoint.mp3"></audio>
 
       <div id="soalLib">
-            <p id="setting_title" onclick="slide()">pustaka soal</p>
+            <p id="setting_title" onclick="slide()">Pustaka Soal</p>
             <p style="margin: 3px 0px 0px 20px; font-size: 15px;">klik untuk mengganti, diterapkan pada soal berikutnya</p>
             <p id="indicator" style="margin: 3px 0px 0px 20px; font-size: 15px;">saat ini = ginjal (default)</p>
             <br>
-            <p class="paket" onclick="changeSoalTo(soal_sincos,'hafalan vektor')">vektor</p>
-            <p class="paket" onclick="changeSoalTo(soal_ginjal, 'ginjal')">ginjal</p>
-            <p class="paket" onclick="changeSoalTo(soal_enzim, 'enzim pencernaan')">enzim pencernaan</p>
-            <p class="paket" onclick="changeSoalTo(soal_bioteknologi,'bioteknologi medern')">bioteknologi modern</p>
-            <p class="paket" onclick="changeSoalTo(soal_penyakitseks,'penyakit reproduksi wanita')">penyakit reproduksi ♀</p>
-            <p class="paket" onclick="changeSoalTo(soal_organel,'organel sel hewan')">organel sel hewan</p>
-            <p class="paket" onclick="changeSoalTo(soal_sifatbayangan,'sifat bayangan cermin cekung/lensa cembung')">sifat bayangan</p>
-            <p class="paket" onclick="changeSoalTo(soal_perpindahanmuatan,'perpindahan muatan benda gosok')">perpindahan muatan</p>
-            <p class="paket" onclick="changeSoalTo(soal_adiktif,'zat adiktif')">zat adiktif</p>
-            <p class="paket" onclick="changeSoalTo(soal_adiktif2,'golongan zat adiktif')">golongan zat adiktif</p>
+            <div id="isian">
+                  <p style="text-align: center; font-size: 25px; margin-top: -10px; margin-bottom: -10px; font-weight: bold;"><u>Soal Isian</u></p>
+            </div>
+            <br>
+            <div id="pilgan">
+                  <p style="text-align: center; font-size: 25px; margin-top: 0px; margin-bottom: -15px; font-weight: bold;"><u>Soal Pilgan</u></p>
+            </div>
       </div>
+
+      
 
       <br><br><hr><br><br><br>
       <button id="buttonHome" class="buttons" style="position: fixed; bottom: 15px; left: 10px;" onclick="window.location.href='../main.html';">Home</button>
+      <script src="soal_lib.js"></script>
       <script src="persiapan.js"></script>
 </body>
 </html>
