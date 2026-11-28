@@ -9,6 +9,8 @@ let soalIndex = 0
 let currentSoal;
 let strukturSoal;
 
+let isPilgan = false
+
 let redactInfoIndex;
 
 let elementRedactedInput;
@@ -41,6 +43,14 @@ function StartDisable() {
       document.getElementById("soalLib").disabled = true;
 }
 
+function pilgan_StartDisable() {
+      document.getElementById("buttonNext").disabled = false;
+      document.getElementById("buttonStart").disabled = true;
+      document.getElementById("buttonDark").disabled = true;
+      document.getElementById("buttonStop").disabled = false;
+      document.getElementById("soalLib").disabled = true;
+}
+
 //audios
 var soundCorrect = document.getElementById("correctsnd")
 var soundWrong = document.getElementById("wrongsnd")
@@ -55,447 +65,15 @@ var soundSetting = document.getElementById("settingsnd");
 function playSetting() {soundSetting.play()}
 
 //SOAL LIBRARY
-soal_ginjal= [
-            {
-                  gambar: null,
-                  subjek: "Bagian bagian nefron ginjal",
-                  petunjuk: "tiga nama bagian ginjal",
-                  struktur: ["glomerulus","TKP","TKD"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Proses-proses pada nefron ginjal",
-                  petunjuk: "urut",
-                  struktur: ["Filtrasi","reabsorpsi","augmentasi"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Masalah pada ginjal",
-                  petunjuk: "nama, letak(2), material dalam urin, hasil",
-                  struktur: ["diabetes mellitus","glomerulus dan tkp","glukosa","merah bata"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Masalah pada ginjal",
-                  petunjuk: "nama, letak, material dalam urin, hasil uji",
-                  struktur: ["albuminuria","glomerulus","protein","ungu"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Masalah pada ginjal",
-                  petunjuk: "nama, letak, material dalam urin, hasil coba",
-                  struktur: ["hematuria","glomerulus","darah","ungu"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Masalah pada ginjal",
-                  petunjuk: "nama, letak, material dalam urin",
-                  struktur: ["batu ginjal","pelvis","endapan"]
-            },
-];
-
-soal_enzim = [
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, zat yang diubah, hasil",
-                  struktur: ["ptialin","mulut","amilum","maltosa"]
-            },
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, zat yang diubah, hasil",
-                  struktur: ["pepsin","lambung","protein","pepton"]
-            },
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, zat yang diubah, hasil",
-                  struktur: ["renin","lambung","protein susu","kasein"]
-            },
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, zat yang diubah, hasil",
-                  struktur: ["tripsin","pankreas","protein","asam amino"]
-            },
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, zat yang diubah, hasil",
-                  struktur: ["lipase","pankreas","lemak","aam lemak dan gliserol"]
-            },
-            {
-                  gambar: null,
-                  subjek: "enzim pada proses pencernaan",
-                  petunjuk: "nama, letak, fungsi utama, fungsi kedua, fungsi ketiga",
-                  struktur: ["asam klorida","lambung","membunuh kuman","mengasamkan makanan","mengaktifkan pepsinogen"]
-            }
-];
-
-soal_bioteknologi = [
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["insulin","diabetes mellitus"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi(2)",
-                  struktur: ["Antibodi Monoklonal","tumor dan kanker"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi(2)",
-                  struktur: ["antibiotik","bakteri dan jamur"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["Urokinase","bekuan darah"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["Eritropoetin","anemia"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["Gen beta globulin","thalasemia"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["vaksin","virus"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - membantu",
-                  struktur: ["protein sel tunggal","protein"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["thiobactillus","pemisahan besi"]
-            },
-            {
-                  gambar: null,
-                  subjek: "Bioteknologi modern",
-                  petunjuk: "nama - mengatasi",
-                  struktur: ["pseudomonas","minyak di laut"]
-            }
-];
-
-soal_penyakitseks = [
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis - gejala(2)",
-            struktur: ["gonorrhoe","neisseria gonorrhoeae","bakteri","kencing panas, nanah"]
-      },
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis - gejala",
-            struktur: ["herpes","herpes","virus","gatal"]
-      },
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis",
-            struktur: ["kanker serviks","hpv","virus"]
-      },
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis - gejala",
-            struktur: ["keputihan","candida albicans","jamur","cairan putih"]
-      },
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis - gejala",
-            struktur: ["sifilis","triponema pallidum","bakteri","bercak merah"]
-      },
-      {
-            gambar: null,
-            subjek: "Penyakit pada organ reproduksi wanita",
-            petunjuk: "nama - penyebab - jenis - gejala",
-            struktur: ["HIV AIDS","HIV","virus","imun turun"]
-      }
-];
-
-soal_organel = [
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["nukleus","mengatur","2"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - kompabilitas - letak",
-            struktur: ["Retikulum Endoplasma","transportasi zat","4"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["sentriol","pembelahan sel","5"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["badan golgi","sekresi sel","6"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["lisosom","sintesis protein","7"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["mitokondria","energi","8"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["membran sel","keluar masuk zat","10"]
-      },
-      {
-            gambar: "assets/asset_sel-hewan.png",
-            subjek: "Organel pada sel",
-            petunjuk: "nama - fungsi - letak",
-            struktur: ["sitosplasma","tempat organel","11"]
-      }
-];
-
-soal_sifatbayangan= [
-      {
-            gambar: null,
-            subjek: "sifat bayangan sesuai ruang pada cermin cekung/lensa cembung",
-            petunjuk: "ruang benda - ruang bayangan - sifat (jenis - orientasi - ukuran)",
-            struktur: ["1","4","maya tegak diperbesar"]
-      },
-      {
-            gambar: null,
-            subjek: "sifat bayangan sesuai ruang pada cermin cekung/lensa cembung",
-            petunjuk: "ruang benda - ruang bayangan - sifat (jenis - orientasi - ukuran)",
-            struktur: ["2","3","nyata terbalik diperbesar"]
-      },
-            {
-            gambar: null,
-            subjek: "sifat bayangan sesuai ruang pada cermin cekung/lensa cembung",
-            petunjuk: "ruang benda - ruang bayangan - sifat (jenis - orientasi - ukuran)",
-            struktur: ["3","2","nyata terbalik diperkecil"]
-      },
-      {
-            gambar: null,
-            subjek: "sifat bayangan sesuai ruang pada cermin cekung/lensa cembung",
-            petunjuk: "ruang benda - ruang bayangan - sifat (jenis - orientasi - ukuran)",
-            struktur: ["4","1","maya tegak diperkecil"]
-      },
-      {
-            gambar: null,
-            subjek: "sifat bayangan sesuai ruang pada cermin cekung/lensa cembung",
-            petunjuk: "ruang benda - ruang bayangan - sifat (jenis - orientasi - ukuran)",
-            struktur: ["R","R","nyata terbalik sama"]
-      },
-];
-
-soal_perpindahanmuatan = [
-      {
-            gambar: null,
-            subjek: "Perpindahan muatan benda setelah digosok",
-            petunjuk: "benda digosok - penggosok - muatan benda digosok dan muatan penggosok",
-            struktur: ["kaca","sutera","+ -"]
-      },
-      {
-            gambar: null,
-            subjek: "Perpindahan muatan benda setelah digosok",
-            petunjuk: "benda digosok (2) - penggosok - muatan benda digosok - muatan penggosok",
-            struktur: ["karet atau ebonit","wol","- +"]
-      },
-      {
-            gambar: null,
-            subjek: "Perpindahan muatan benda setelah digosok",
-            petunjuk: "benda digosok - penggosok (2) - muatan benda digosok - muatan penggosok",
-            struktur: ["plastik","rambut atau wol","- +"]
-      },
-];
-
-soal_adiktif = [
-      {
-            gambar: null,
-            subjek: "zat adiktif",
-            petunjuk: "jenis - pengaruh (2) - contoh",
-            struktur: ["narkotika","psikologi dan fisik","ganja heroin kokain morfin"]
-      },
-      {
-            gambar: null,
-            subjek: "zat adiktif",
-            petunjuk: "jenis - pengaruh - contoh",
-            struktur: ["psikotropika","psikologi","ekstasi amfetamin"]
-      },
-      {
-            gambar: null,
-            subjek: "zat adiktif lain",
-            petunjuk: "contoh - contoh - contoh",
-            struktur: ["nikotin","alkohol","kafein"]
-      },
-];
-
-soal_adiktif2 = [
-      {
-            gambar: null,
-            subjek: "golongan zat adiktif stimulan",
-            petunjuk: "meningkatkan kerja tubuh, berikan contoh (7)",
-            struktur: ["kokain","ekstasi","sabu","amfetamin","nikotin","kafein"]
-      },
-      {
-            gambar: null,
-            subjek: "golongan zat adiktif halusinogen",
-            petunjuk: "meningkatkan kerja tubuh dan halusinasi, berikan contoh (2)",
-            struktur: ["ganja","LSD"]
-      },
-      {
-            gambar: null,
-            subjek: "golongan zat adiktif depresan",
-            petunjuk: "menurunkan kerja tubuh, berikan contoh (3)",
-            struktur: ["morfin","heroin","putaw"]
-      },
-];
-
-soal_sincos = [
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["0","0"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["30","1/2"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["37","3/5"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["45","1/2 akar 2"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["53","4/5"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["60 120","1/2 akar 3"]
-      },
-      {
-            gambar: null,
-            subjek: "sin",
-            petunjuk: "sudut - nilai",
-            struktur: ["90","1"]
-      },
-
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["0","1"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["30","1/2 akar 3"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["37","4/5"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["45","1/2 akar 2"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["53","3/5"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["60","1/2"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["90","0"]
-      },
-      {
-            gambar: null,
-            subjek: "cos",
-            petunjuk: "sudut - nilai",
-            struktur: ["120","-1/2"]
-      }
-
-]
-
-
-//change mechanism
-const elementIndicator = document.getElementById("indicator")
-
-function changeSoalTo(namaSoal,pesanSoal) {
-      playSetting();
-      soal = namaSoal;
-      console.log("Soal telah diubah ke soal " + pesanSoal);
-      elementIndicator.textContent = "saat ini = " + pesanSoal;
-      terminate();
-      document.getElementById("buttonStart").click()
-}
+//    di file sebelah ngab
 
 const elementGambar = document.getElementById("element_gambar");
-elementGambar.style.opacity = "0";
+//elementGambar.style.opacity = "0";
 
 //easy setting, ganti ke paket soal disini
-soal = soal_sincos;
+soal = soal_hukumbacaan;
 
+//    ISIAN
 //when submit
 function getSoal() {
       document.getElementById("buttonNext").disabled = false;
@@ -505,14 +83,14 @@ function getSoal() {
       if (soalIndex == prevsoal) {
             soalIndex = Math.floor(Math.random() * soal.length);
       }
-      console.log(soalIndex);
+      //console.log(soalIndex);
       currentSoal = soal[soalIndex];
       if (currentSoal.gambar == null) {
             elementGambar.src = "assets/asset_null.png";
             elementGambar.style.display = "none"
       } else {
             elementGambar.src = currentSoal.gambar;
-            elementGambar.style.display = "inline"
+            elementGambar.style.marginLeft = "25vw"
       };
       strukturSoal = currentSoal.struktur;
 
@@ -532,9 +110,11 @@ function applySoal() {
       elementSubjek.textContent = currentSoal.subjek;
       elementPetunjuk.textContent = currentSoal.petunjuk;
 
+      console.log("Soal :" + currentSoal.subjek);
+      console.log(currentSoal.petunjuk)
+
       strukturSoal.forEach((item, index) => {
             const input = document.createElement("input");
-
             input.type = "text";
             
             if (index === redactInfoIndex) {
@@ -576,14 +156,100 @@ function evaluasi() {
                         elementRedactedInput.style.color = "green";
                   };
             playCorrect();
+            console.log("jawaban mu : " + elementRedactedInput.value + " - benar")
       } else { 
             elementRedactedInput.style.borderColor = "red";
             elementRedactedInput.style.color = "red";
+            console.log("jawaban mu : " + '"' + elementRedactedInput.value + '"' + " - salah")
+            console.log("kunci jawaban : " + elementRedactedValue)
             elementRedactedInput.value = elementRedactedInput.value+ " (" + elementRedactedValue + ")";
             playWrong();
+            
       };
+      console.log("============================================")
+
       setTimeout(getSoal, 650);
 };
+
+//    PILGAN
+function getPilgan() {
+      document.getElementById("buttonNext").disabled = false;
+      playNext();
+      elementContainer.textContent = "";
+      soalIndex = Math.floor(Math.random() * soal.length);
+      if (soalIndex == prevsoal) {
+            soalIndex = Math.floor(Math.random() * soal.length);
+      }
+      //console.log(soalIndex);
+      currentSoal = soal[soalIndex]; //ambil pecahan soal
+      if (currentSoal.gambar == null) {
+            elementGambar.src = "assets/asset_null.png";
+            elementGambar.style.display = "none"
+      } else {
+            elementGambar.src = currentSoal.gambar;
+            elementGambar.style.marginLeft = "25vw"
+      };
+      strukturSoal = currentSoal.pilgan;
+      //console.log(currentSoal)
+      console.log(strukturSoal)
+
+      prevsoal = soalIndex;
+      applyPilgan();
+}
+
+function applyPilgan() {
+      elementSubjek.textContent = currentSoal.subjek;
+      elementPetunjuk.textContent = currentSoal.petunjuk;
+
+      console.log("Soal :" + currentSoal.subjek);
+      console.log(currentSoal.petunjuk)
+
+      for (let i = 0; i < strukturSoal.length; i++) {
+            const button = document.createElement("button");
+            button.textContent = strukturSoal[i];
+            button.style.width = "fit-content"
+            button.style.textAlign = "center"
+            elementContainer.appendChild(button);
+            button.className = "pilgan_opsi";
+            if (isDark == true) {button.style.color = "white"} 
+                  else {button.style.color = "black"}
+            if (i == currentSoal.kunci) {
+                  button.onclick = () => {
+                        console.log("benar")
+                        evaluasi_benar();
+                  };
+                  button.id = 'correct'
+            } else {
+                  button.onclick = () => {
+                        let wrongs = document.querySelectorAll('#wrong')
+                        wrongs.forEach(element => {
+                              element.style.color = "gray"
+                              element.disabled = true
+                        })
+                        button.style.color = "red"
+                        document.getElementById("correct").style.color = "green"
+                        playWrong()
+                        setTimeout(getPilgan, 650);
+                  };
+                  button.id = "wrong"
+
+            }
+      }
+}
+
+function evaluasi_benar() {
+      let wrongs = document.querySelectorAll('#wrong')
+      wrongs.forEach(element => {
+            element.style.color = "gray"
+            element.disabled = true
+      })
+      
+      document.getElementById("correct").disabled = true;
+      document.getElementById("correct").style.color = "green";
+      playCorrect();
+      setTimeout(getPilgan, 650);
+}
+
 
 //dark mode toggle
 let isDark = false;
@@ -597,6 +263,7 @@ function dark() {
             document.getElementById("element_Petunjuk").style.color = "#a5a5a5";
             document.getElementById("buttonDark").style.color = "#f0f0f0";
             document.getElementById("soalLib").style.filter = "invert(0.95)";
+            elementGambar.style.filter = "invert(0.95)"
             element_buttons.forEach(element => {
                   element.style.filter = "invert(0.94)";
             });
@@ -608,6 +275,7 @@ function dark() {
             document.getElementById("element_Petunjuk").style.color = "#000000";
             document.getElementById("buttonDark").style.color = "#000000";
             document.getElementById("soalLib").style.filter = "invert(0)";
+            elementGambar.style.filter = "invert(0)";
             element_buttons.forEach(element => {
                   element.style.filter = "invert(0)";
             });
@@ -618,6 +286,12 @@ function dark() {
 //terminator
 function terminate() {
       elementRedactedInput.disabled = true;
+      document.getElementById("buttonNext").disabled = true;
+      document.getElementById("buttonStart").disabled = false;
+      document.getElementById("buttonDark").disabled = false;
+}
+
+function pilganterminate() {
       document.getElementById("buttonNext").disabled = true;
       document.getElementById("buttonStart").disabled = false;
       document.getElementById("buttonDark").disabled = false;
