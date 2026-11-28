@@ -71,7 +71,7 @@ const elementGambar = document.getElementById("element_gambar");
 //elementGambar.style.opacity = "0";
 
 //easy setting, ganti ke paket soal disini
-soal = soal_hukumbacaan;
+soal = soal_sincos
 
 //    ISIAN
 //when submit
